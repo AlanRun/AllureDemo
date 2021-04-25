@@ -1,5 +1,6 @@
 package framework.driver;
 
+import framework.helper.OSUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -56,7 +57,19 @@ public class DriverFactory {
      */
     public WebDriver createWebDriver() {
         System.out.println(Thread.currentThread() + ":" + new Date() + ":::Start creating web driver instance: Chrome");
-        System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver.exe");
+
+        String driverPath = "./src/test/resources/";
+        if (OSUtility.isWindows()) {
+            driverPath = driverPath + "chromedriver.exe";
+        } else if (OSUtility.isMac()) {
+            driverPath = driverPath + "mac/chromedriver.exe";
+        } else {
+            driverPath = driverPath = "chromedriver";
+        }
+
+        System.setProperty("webdriver.chrome.driver", driverPath);
+
+//        System.setProperty("webdriver.chrome.driver","./src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
 
         driverSession.set(driver);
