@@ -70,7 +70,7 @@ public class PageObject extends BasePage implements IPage {
         ConfigProperty cp = new ConfigProperty("./config.properties");
         String value = cp.getProperty(key);
 
-        System.out.println("key=" + key + "\t value=" + value);
+        System.out.println("key=" + key + ", value=" + value);
         return value;
     }
 

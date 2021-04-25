@@ -6,12 +6,12 @@ public class WaitHelper {
 
     /**
      * Thread sleep
-     * @param millis ms
+     * @param milliseconds ms
      */
-    public static void sleep(long millis) {
+    public static void sleep(long milliseconds) {
         try {
-            Thread.sleep(millis);
-            TestLogging.stepLog("Thread sleep: " + millis + " ms", false);
+            Thread.sleep(milliseconds);
+            TestLogging.stepLog("Thread sleep: " + milliseconds + " ms", false);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

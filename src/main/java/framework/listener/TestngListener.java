@@ -20,7 +20,14 @@ public class TestngListener extends TestListenerAdapter  {
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
         WebDriver driver = DriverFactory.getWebDriver();
+        getCurrentURL(driver);
         takePhoto(driver);
+    }
+
+
+    @Attachment(value = "Fail Url As:", type = "text/plain")
+    public String getCurrentURL(WebDriver driver){
+        return driver.getCurrentUrl();
     }
 
 

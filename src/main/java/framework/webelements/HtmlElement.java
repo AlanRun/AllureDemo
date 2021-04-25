@@ -304,7 +304,7 @@ public class HtmlElement {
      * which needs long time to present.
      * @return
      */
-    public boolean waitElementExist(final int timeout, int interval) {
+    public boolean waitExist(final int timeout, int interval) {
 //        TestLogging.stepLog("wait " + timeout + "s for " + toHTML() + " exist.", false);
         try {
             final Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS)
@@ -325,11 +325,21 @@ public class HtmlElement {
     }
 
     /**
+     * wait for element be clickable(enable)
+     * @param timeOutInSeconds
+     */
+    public void waitBeClickable(long timeOutInSeconds){
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+        } catch (TimeoutException e) { }
+    }
+
+    /**
      * wait for element be displayed
      * @param timeOutInSeconds
      */
     public void waitBeDisplayed(long timeOutInSeconds){
-//        TestLogging.stepLog("wait " + timeOutInSeconds + "s for " + toHTML() + " to be displayed.", false);
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -351,7 +361,19 @@ public class HtmlElement {
     public void click() {
         TestLogging.stepLog("click on " + toHTML(), false);
         findElement();
+
         element.click();
+    }
+
+    /**
+     * Click element by JS.
+     */
+    public void clickByJS() {
+        TestLogging.stepLog("click on " + toHTML(), false);
+        findElement();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
     }
 
     public void moveTo() {
@@ -420,6 +442,13 @@ public class HtmlElement {
         TestLogging.stepLog("Send keys[" + arg0 + "] on " + toHTML(), false);
         findElement();
         element.sendKeys(arg0);
+    }
+
+    /**
+     * send Enter key.
+     */
+    public void sendEnter(){
+        sendKeys(Keys.ENTER);
     }
 
     /**

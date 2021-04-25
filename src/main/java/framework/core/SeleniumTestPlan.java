@@ -16,7 +16,7 @@ public abstract class SeleniumTestPlan {
         ConfigProperty cp = new ConfigProperty("./config.properties");
         String value = cp.getProperty(key);
 
-        System.out.println("key=" + key + "\t value=" + value);
+        System.out.println("key=" + key + ", value=" + value);
         return value;
     }
 
@@ -26,7 +26,7 @@ public abstract class SeleniumTestPlan {
      */
     @BeforeSuite(alwaysRun = true)
     public void beforeTestSuite(final ITestContext testContext) {
-        System.out.println("####################################################");
+        System.out.println("##############################################################################");
         DriverFactory.getWebDriver(true);
     }
 

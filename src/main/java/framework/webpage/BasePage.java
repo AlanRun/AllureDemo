@@ -73,14 +73,36 @@ public class BasePage {
     }
 
     /**
-     * Assert element is display(visible)
+     * Assert element is display(visible).
      * @param element
      * @param timeOutInSeconds
      */
     public void assertElementDisplay(final HtmlElement element, int timeOutInSeconds){
         element.waitBeDisplayed(timeOutInSeconds);
         TestLogging.stepLog("Assert element: " + element.toHTML() + " is display.", false);
-        assertHTML(element.isDisplayed(), element.toString() + " not found or visible.");
+        assertHTML(element.isDisplayed(), element.toString() + " not found or not visible.");
+    }
+
+    /**
+     * Assert element is selected.
+     * @param element
+     * @param timeOutInSeconds
+     */
+    public void assertElementSelected(final HtmlElement element, int timeOutInSeconds){
+        element.waitBeSelected(timeOutInSeconds);
+        TestLogging.stepLog("Assert element: " + element.toHTML() + " is display.", false);
+        assertHTML(element.isSelected(), element.toString() + " not found or not selected.");
+    }
+
+    /**
+     * Assert element is clickable.
+     * @param element
+     * @param timeOutInSeconds
+     */
+    public void assertElementEnable(final HtmlElement element, int timeOutInSeconds){
+        element.waitBeClickable(timeOutInSeconds);
+        TestLogging.stepLog("Assert element: " + element.toHTML() + " is clickable.", false);
+        assertHTML(element.isEnabled(), element.toString() + " not found or not clickable.");
     }
 
     protected void assertHTML(final boolean condition, final String message) {
